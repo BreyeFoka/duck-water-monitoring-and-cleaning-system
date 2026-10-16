@@ -22,5 +22,6 @@ jobs:
               source-url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
           libraries: |
             - name: ArduinoJson
+              version: 6.21.5
           sketch-paths: |
             - build/duck_pond_controller

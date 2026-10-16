@@ -3,9 +3,24 @@
  * Use these functions to test individual components and calibrate sensors
  */
 
+#include <Arduino.h>
+#include <WiFi.h>
 #include "config.h"
 #include "sensors.h"
 #include "pump_controller.h"
+
+// Unlike .ino files, .cpp files get no automatic prototypes, so declare these first.
+void setupTestMode();
+void handleTestCommands();
+void testAllSensors();
+void testPump();
+void testValve();
+void testIndicators();
+void monitorSensors();
+void testFullCycle();
+void printSystemStatus();
+void printNetworkInfo();
+bool verifyHardwareConnections();
 
 // Test mode flags
 bool testMode = false;

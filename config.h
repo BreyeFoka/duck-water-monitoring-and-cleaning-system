@@ -6,6 +6,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <Arduino.h>
+
 // WiFi Configuration
 #define WIFI_SSID "YourWiFiName"
 #define WIFI_PASSWORD "YourWiFiPassword"
