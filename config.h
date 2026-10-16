@@ -10,15 +10,17 @@
 #define WIFI_SSID "YourWiFiName"
 #define WIFI_PASSWORD "YourWiFiPassword"
 
-// Pin Assignments
-#define TURBIDITY_PIN A0           // Analog pin for turbidity sensor
-#define WATER_LEVEL_HIGH_PIN 2     // Digital pin for high water level sensor
-#define WATER_LEVEL_LOW_PIN 3      // Digital pin for low water level sensor
-#define MANUAL_BUTTON_PIN 4        // Manual cleaning button
-#define PUMP_RELAY_PIN 5           // Relay to control water pump
-#define VALVE_RELAY_PIN 6          // Relay to control inlet valve
-#define STATUS_LED_PIN 7           // Status LED
-#define BUZZER_PIN 8               // Alert buzzer
+// Pin Assignments (ESP32)
+// Avoid GPIO 6-11 (wired to the module's flash), GPIO 1/3 (USB serial)
+// and the boot strapping pins (GPIO 0, 2, 5, 12, 15).
+#define TURBIDITY_PIN 36           // ADC1 input-only pin (A0) for the turbidity sensor
+#define WATER_LEVEL_HIGH_PIN 25    // High water level float switch (input, pull-up)
+#define WATER_LEVEL_LOW_PIN 26     // Low water level float switch (input, pull-up)
+#define MANUAL_BUTTON_PIN 27       // Manual cleaning button (input, pull-up)
+#define PUMP_RELAY_PIN 16          // Relay to control water pump
+#define VALVE_RELAY_PIN 17         // Relay to control inlet valve
+#define STATUS_LED_PIN 18          // Status LED
+#define BUZZER_PIN 19              // Alert buzzer
 
 // Sensor Thresholds
 #define TURBIDITY_THRESHOLD 800    // ADC value above which water is considered dirty

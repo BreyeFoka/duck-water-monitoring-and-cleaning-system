@@ -80,6 +80,25 @@ Functions available remotely:
 
 ---
 
+## 🗂️ Code and Docs
+
+| File | What it does |
+| --- | --- |
+| `duck_pond_controller.ino` | Main sketch: Wi-Fi, web server, cleaning decisions |
+| `sensors.cpp/.h` | Turbidity and water level readings, calibration |
+| `pump_controller.cpp/.h` | Drain, settle and refill sequence with safety limits |
+| `web_interface.cpp/.h` | Web dashboard and JSON API served by the ESP32 |
+| `config.h` | Pins, thresholds, timings and Wi-Fi settings |
+| `test_functions.cpp` | Hardware checks for each sensor and relay |
+
+Wiring, pin assignments and power: [`Docs/WIRING_GUIDE.md`](Docs/WIRING_GUIDE.md). Libraries: [`Docs/LIBRARIES.md`](Docs/LIBRARIES.md). Design and API details: [`Docs/TECHNICAL_DOCS.md`](Docs/TECHNICAL_DOCS.md).
+
+**Build:** install the ESP32 board package and ArduinoJson, set your Wi-Fi in `config.h`, then upload `duck_pond_controller.ino`.
+
+**Pins:** turbidity on GPIO36, float switches on GPIO25 and GPIO26, button on GPIO27, relays on GPIO16 and GPIO17, LED on GPIO18, buzzer on GPIO19. These avoid the ESP32's flash, serial and boot pins.
+
+---
+
 ## 🧪 Calibration and Testing
 - Test turbidity readings with clean vs dirty water.
 - Set a threshold value (e.g., 800 ADC).

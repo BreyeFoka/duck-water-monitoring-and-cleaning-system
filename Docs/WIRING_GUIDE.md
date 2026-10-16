@@ -6,18 +6,23 @@
 ```
 ESP32 Pin    | Component           | Wire Color | Notes
 -------------|---------------------|------------|------------------
-A0 (GPIO36)  | Turbidity Sensor    | Yellow     | Analog signal
-GPIO2        | Water Level High    | Blue       | Digital input (pullup)
-GPIO3        | Water Level Low     | Green      | Digital input (pullup)
-GPIO4        | Manual Button       | White      | Digital input (pullup)
-GPIO5        | Pump Relay Signal   | Red        | Digital output
-GPIO6        | Valve Relay Signal  | Orange     | Digital output
-GPIO7        | Status LED          | Purple     | Digital output
-GPIO8        | Buzzer              | Brown      | Digital output
+GPIO36 (A0)  | Turbidity Sensor    | Yellow     | Analog signal (input-only ADC1 pin)
+GPIO25       | Water Level High    | Blue       | Digital input (pullup)
+GPIO26       | Water Level Low     | Green      | Digital input (pullup)
+GPIO27       | Manual Button       | White      | Digital input (pullup)
+GPIO16       | Pump Relay Signal   | Red        | Digital output
+GPIO17       | Valve Relay Signal  | Orange     | Digital output
+GPIO18       | Status LED          | Purple     | Digital output
+GPIO19       | Buzzer              | Brown      | Digital output
 GND          | Common Ground       | Black      | All grounds
 3.3V         | Sensor Power        | Red        | Low power sensors
 5V           | Relay Power         | Red        | Relay modules
 ```
+
+> **Why these pins:** on ESP32 modules GPIO 6–11 are wired to the flash chip, so driving them crashes or hangs the board. GPIO 1 and 3 are the USB serial port, and GPIO 0, 2, 5, 12 and 15 set the boot mode, so a relay or switch on them can stop the board from starting.
+>
+> **Turbidity sensor voltage:** many turbidity modules output up to about 4.5 V, while ESP32 pins take at most 3.3 V. Use a voltage divider (for example 10 kΩ / 20 kΩ) on the signal line, then recalibrate the thresholds in `config.h` with clean and dirty water samples. On most modules the voltage *drops* as water gets dirtier, so check which direction your sensor reads before trusting `TURBIDITY_THRESHOLD`.
+
 
 ## Physical Connections
 
@@ -54,18 +59,18 @@ Signal (Yellow)  → GPIO36 (A0)
 ```
 High Level Sensor → ESP32
 Common           → GND
-NO (Normally Open) → GPIO2
+NO (Normally Open) → GPIO25
 
 Low Level Sensor → ESP32
 Common           → GND
-NO (Normally Open) → GPIO3
+NO (Normally Open) → GPIO26
 ```
 
 #### Manual Button
 ```
 Push Button → ESP32
 One terminal → GND
-Other terminal → GPIO4
+Other terminal → GPIO27
 (Internal pullup resistor used)
 ```
 
@@ -76,22 +81,22 @@ Other terminal → GPIO4
 Relay Module 1 (Pump) → ESP32 & Power
 VCC     → 5V
 GND     → GND
-Signal  → GPIO5
+Signal  → GPIO16
 
 Relay Module 2 (Valve) → ESP32 & Power
 VCC     → 5V
 GND     → GND
-Signal  → GPIO6
+Signal  → GPIO17
 ```
 
 #### Status Indicators
 ```
 LED → ESP32
-Anode (+) → GPIO7
+Anode (+) → GPIO18
 Cathode (-) → 220Ω resistor → GND
 
 Buzzer → ESP32
-Positive → GPIO8
+Positive → GPIO19
 Negative → GND
 ```
 

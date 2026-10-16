@@ -22,13 +22,13 @@ This ESP32-based system automatically monitors and cleans a duck pond using turb
 ESP32 Pin    | Component
 -------------|------------------
 A0 (GPIO36)  | Turbidity Sensor (analog)
-GPIO2        | Water Level High Sensor
-GPIO3        | Water Level Low Sensor  
-GPIO4        | Manual Button
-GPIO5        | Pump Relay
-GPIO6        | Valve Relay
-GPIO7        | Status LED
-GPIO8        | Buzzer
+GPIO25       | Water Level High Sensor
+GPIO26       | Water Level Low Sensor  
+GPIO27       | Manual Button
+GPIO16       | Pump Relay
+GPIO17       | Valve Relay
+GPIO18       | Status LED
+GPIO19       | Buzzer
 GND          | All ground connections
 3.3V         | Sensor power (if 3.3V)
 5V           | Relay module power
