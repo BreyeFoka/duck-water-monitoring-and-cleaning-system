@@ -1,0 +1,26 @@
+name: compile
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Arduino needs the sketch folder to have the same name as the .ino file.
+      - name: Arrange sketch folder
+        run: |
+          mkdir -p "build/duck_pond_controller"
+          find . -maxdepth 1 -type f \( -name '*.ino' -o -name '*.cpp' -o -name '*.h' \) -exec cp {} "build/duck_pond_controller/" \;
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: esp32:esp32:esp32
+          platforms: |
+            - name: esp32:esp32
+              source-url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          libraries: |
+            - name: ArduinoJson
+          sketch-paths: |
+            - build/duck_pond_controller
