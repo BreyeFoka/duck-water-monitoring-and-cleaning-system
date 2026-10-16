@@ -8,6 +8,20 @@
 #include "sensors.h"
 #include <ArduinoJson.h>
 #include <WebServer.h>
+#include <WiFi.h>
+
+// Forward declarations: .cpp files get no automatic prototypes.
+void handleRoot();
+void handleGetStatus();
+void handleGetSettings();
+void handleSetSettings();
+void handleManualClean();
+void handleStopCleaning();
+void handleEnableSystem();
+void handleDisableSystem();
+void sendJsonResponse(int code, String message);
+void sendCORSHeaders();
+
 
 extern WebServer server;
 extern SystemStatus currentStatus;
@@ -15,7 +29,8 @@ extern bool systemEnabled;
 extern bool manualCleaningRequested;
 
 void handleRoot() {
-  String html = R"(
+  // Custom raw-string delimiter: the page contains )" (in onclick="...()"), which ends a plain R"( string.
+  String html = R"HTML(
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -409,7 +424,7 @@ void handleRoot() {
     </script>
 </body>
 </html>
-)";
+)HTML";
   
   server.send(200, "text/html", html);
 }

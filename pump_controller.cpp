@@ -8,6 +8,26 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 
+// Forward declarations: .cpp files get no automatic prototypes.
+void initializePumpController();
+void updatePumpController();
+void handleDrainingPhase(unsigned long elapsed);
+void handleSettlingPhase(unsigned long elapsed);
+void handleRefillingPhase(unsigned long elapsed);
+void handleCompletingPhase(unsigned long elapsed);
+void startCleaningCycle(String reason);
+void stopCleaningCycle();
+void emergencyStop();
+bool canStartCleaning();
+void startPump();
+void stopPump();
+void startRefill();
+void stopRefill();
+void setPhase(CleaningPhase newPhase);
+String getPhaseString(CleaningPhase phase);
+void soundAlert(int beeps);
+
+
 // Cleaning state variables
 CleaningPhase currentPhase = IDLE;
 unsigned long phaseStartTime = 0;

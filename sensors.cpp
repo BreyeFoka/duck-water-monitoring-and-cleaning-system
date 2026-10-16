@@ -5,6 +5,16 @@
 #include "sensors.h"
 #include <Arduino.h>
 
+// Forward declarations: .cpp files get no automatic prototypes.
+void initializeSensors();
+void updateSensorReadings();
+int readTurbidity();
+bool isWaterLevelHigh();
+bool isWaterLevelLow();
+bool isWaterLevelSafe();
+void calibrateTurbidySensor();
+
+
 // Turbidity sensor calibration values
 int turbidityMin = 0;
 int turbidityMax = 1023;
